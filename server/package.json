@@ -5,7 +5,10 @@
   "repository": "github.com/ieeeupsb/workshop-react-native.git",
   "license": "MIT",
   "dependencies": {
+    "browsersync": "^0.0.1-security",
     "express": "^4.16.2",
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.8",
     "ws": "^4.1.0"
   },
   "devDependencies": {
