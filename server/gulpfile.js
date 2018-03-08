@@ -10,20 +10,10 @@ gulp.task('default', () =>{
 })
 
 gulp.task('build', () => { 
-    let proc = exec('tsc') //??????
-
-    proc.on('close', (code) => {
-        if(code === 8){
-            console.log("Error, waiting for further changes")
-        }
-        console.log(code)
-    })
-    proc.stdout.on('data', (data) => {
-        console.log(data.toString())
-    })
-
-    proc.stderr.on('data', (data) => {
-        console.log(data.toString())
+    let proc = exec('npm run build', (error, stdout, stderr) => {
+        console.log(stdout)
+        console.log(stderr)
+        console.log(error)
     })
 })
 
