@@ -35,7 +35,6 @@ router.route('/players')
 
         if(duplicate === undefined){
             res.status(200)
-            res.json({'lol': 'xd'})
             players.push(new Player(uuid.create(), req.body.name))
         }
         else{ 
@@ -101,20 +100,11 @@ router.route('/room/:id/members')
 
         if(!playerAlreadyIn){
             res.status(200)
-            res.json({'lol': 'xd'})
         }
         else{
             res.status(400)
             res.json({'error': 'Player already in the room'})
         }
-    })
-
-
-//só pra ver se funca
-router.route('/test')
-    .get((req, res) => {
-        res.status(418)
-        res.json({'ola': 'biba'})
     })
 
 server.listen(process.env.PORT || 8000, () => {
