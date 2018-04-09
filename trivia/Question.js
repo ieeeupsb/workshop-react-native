@@ -10,11 +10,11 @@ export default props =>
         <Panel text={props.question.question} />
       </View>
       <View style={{ flex: 1, flexDirection: "row" }}>
-        <Panel text={props.opt1} />
-        <Panel text={props.opt2} />
+        <Panel text={props.question.opt1} />
+        <Panel text={props.question.opt2} />
       </View>
       <View style={{ flex: 1, flexDirection: "row" }}>
-        <Panel text={props.opt3} />
-        <Panel text={props.opt4} />
+        <Panel text={props.question.opt3} />
+        <Panel text={props.question.opt4} />
       </View>
     </View>
