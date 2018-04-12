@@ -8,7 +8,7 @@ export default styles = StyleSheet.create({
       justifyContent: 'center',
     },
     question: {
-      backgroundColor: 'skyblue',
+      backgroundColor: '#fff',
       flex: 1,
       flexDirection: 'column',
       justifyContent: 'space-around',

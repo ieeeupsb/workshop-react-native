@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { View } from "react-native";
+
 import Question from "./Question";
 import Panel from "./Panel";
 
@@ -12,41 +14,51 @@ export default class Game extends Component {
     };
 
     this.fetchQuestions(props.nQuestions).then(res => {
-      let q = []
+      let q = [];
 
-      for(question of res.results){
-        const answer = question.correct_answer
-        let options = question.incorrect_answers
-        options.push(answer)
-        options = this.shuffle(options) 
+      for (question of res.results) {
+        const answer = { text: question.correct_answer, correct: true };
+        let options = question.incorrect_answers.map(option => {
+          return { text: option, correct: false };
+        });
+        options.push(answer);
+        options = this.shuffle(options);
 
         q.push({
-          "question": question.question,
-          "opt1": options[0], "opt2": options[1], "opt3": options[2], "opt4": options[3],
-          "rightopt": answer
-        })
+          question: question.question,
+          options: options,
+          rightopt: answer
+        });
       }
+
+      console.log(q)
+
+      this.setState({ loaded: true, questions: q, currentQuestion: 0 }, () => console.log(this.state));
       
-      this.setState(previousState => { return { loaded: true, questions: q, currentQuestion: 0 }})
     });
   }
 
   shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
     }
     return a;
   }
 
-  handleAnswer(answer) {
+  handleAnswer = answer => () => {
+    console.log(this.state);
     this.setState(previousState => {
       return {
         ...previousState,
         answers: previousState.answers.concat([answer])
       };
     });
-  }
+  };
+
+  correctQuestions = () => {
+    return this.state.answers.filter(value => value == true).length
+  };
 
   fetchQuestions(number) {
     return fetch(`https://opentdb.com/api.php?amount=${number}`).then(res =>
@@ -56,10 +68,11 @@ export default class Game extends Component {
 
   render() {
     return this.state.loaded ? (
-      <Question
-        question={this.state.questions[this.state.currentQuestion]}
-        answerHandler={this.handleAnswer}
-      />
+        
+        <Question
+          question={this.state.questions[this.state.answers.length]}
+          answerHandler={this.handleAnswer}
+        />
     ) : (
       <Panel text={"Loading, please wait"} />
     );
