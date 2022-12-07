@@ -8,7 +8,7 @@
     "@types/uuid-js": "^0.7.1",
     "axios": "^0.18.0",
     "browsersync": "^0.0.1-security",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "uuid-js": "^0.7.5",
     "ws": "^5.0.0"
   },
